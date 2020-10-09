@@ -1,5 +1,17 @@
-const { findOneByCEP } = require("../repository/CEPRepository");
+const { findOneByCEP, findAll } = require("../repository/CEPRepository");
 const { addCEP } = require("../services/CEPService");
+
+exports.index = async (req, res) => {
+
+ const ceps = await findAll();
+
+ if(ceps[0]){
+   return res.json({ status: 'success', message: 'Os dados foram carregados', data: ceps });
+ }
+
+  return res.json({ status: 'warning', message: 'Não foram encontrados nenhum CEP cadastrado!' });
+};
+
 
 exports.create = async (req, res) => {
   const { city, cep } = req.body;
