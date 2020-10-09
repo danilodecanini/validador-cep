@@ -1,0 +1,9 @@
+{
+  "name": "api-backend",
+  "version": "1.0.0",
+  "description": "API that validates and register Brazilian CEP's",
+  "main": "src/index.js",
+  "author": "Danilo de Canini",
+  "license": "MIT",
+  "private": true
+}
