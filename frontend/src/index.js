@@ -6,7 +6,7 @@ import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Windmill usePreferences>
+    <Windmill light>
       <App />
     </Windmill>
   </React.StrictMode>,
