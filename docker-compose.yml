@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  api:
+    build: ./backend
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db
+    container_name: cep-api
+
+  client:
+    build: ./frontend
+    ports:
+      - '80:80'
+    container_name: cep-client
+
+  db:
+    image: mongo
+    ports:
+      - '27017:27017'
+    container_name: cep-db
