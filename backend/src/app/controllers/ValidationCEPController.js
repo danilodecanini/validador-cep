@@ -32,5 +32,5 @@ exports.create = async (req, res) => {
     }
   }
 
-  return res.json({ status: 'warning', message: 'O CEP informado já existe no banco de dados!' });
+  return res.status(400).json({ status: 'warning', message: 'O CEP informado já existe no banco de dados!' });
 };
