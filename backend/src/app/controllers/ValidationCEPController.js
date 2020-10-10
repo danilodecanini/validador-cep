@@ -23,12 +23,12 @@ exports.create = async (req, res) => {
   const cepAlreadyExists = await findOneByCEP(cep);
 
   if(!cepAlreadyExists){
-    const cepCreated = addCEP(city, cep);
+    const cepCreated = await addCEP(city, cep);
 
     if(cepCreated.status === 'success'){
       return res.status(201).json({ status: 'success', message: `CEP ${cep} adicionado com sucesso!`});
     } else {
-      return res.status(400).json({ status: 'error', message: 'Erro de validação no CEP'});
+      return res.status(400).json({ status: 'error', message: 'O CEP informado não atende os critérios de validação'});
     }
   }
 

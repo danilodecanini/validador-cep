@@ -1,19 +1,35 @@
 const CEP = require("../models/CEP");
+const { checkSizeOfCEP } = require("../validations/CEP/checkSizeOfCEP");
+const { matchPattern } = require("../validations/CEP/matchPattern");
+const { sanitizeCEP } = require("../validations/CEP/sanitizeCEP");
 
 exports.addCEP = async (city, cep) => {
 
   if(city && cep){
 
-    //Validação do CEP
+    let isValidCEP = false;
+    let sanitezedValue = sanitizeCEP(cep);
 
+    if(checkSizeOfCEP(sanitezedValue) && matchPattern(sanitezedValue)){
+      isValidCEP = true;
+    }
 
-    //Se todas as validações passarem criar CEP
-    const cepCreated = await CEP.create({
-      city,
-      cep
-    });
+    if(isValidCEP){
+      const cepCreated = await CEP.create({
+        city,
+        cep
+      });
 
-    return cepCreated;
+      if(cepCreated){
+        return {
+          status: 'success',
+          data: cepCreated
+        };
+      }
+    }
+
+    return false;
+
   }
 
   return false;
